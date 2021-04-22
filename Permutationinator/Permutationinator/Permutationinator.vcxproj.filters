@@ -23,5 +23,8 @@
     <ClInclude Include="Logics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Permutationinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

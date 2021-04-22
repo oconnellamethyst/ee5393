@@ -1,0 +1,4 @@
+﻿1>------ Rebuild All started: Project: Permutationinator, Configuration: Debug Win32 ------
+1>Permutationinator.cpp
+1>Permutationinator.vcxproj -> C:\Users\fort3\Documents\GitHub\ee5393\Permutationinator\Debug\Permutationinator.exe
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

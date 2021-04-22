@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Permutationinator",
+    "\\Permutationinator\\Permutationinator"
   ],
+  "SelectedNode": "\\Permutationinator\\Permutationinator\\Permutationinator.cpp",
   "PreviewInSolutionExplorer": false
 }
