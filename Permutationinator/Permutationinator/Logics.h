@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 using namespace std;
 int nand(int, int);
 int mysteryfunct(int, int);
+int compare(int, int[]);
 #define VAR_NAME(x) #x;
 
 class Logics {
@@ -15,75 +17,95 @@ public:
 
     Logics operator * (Logics const& obj) {
         Logics result;
-        std::cout << "Start AND" << endl;
+        cout << "Start AND" << endl;
         result.bit = nand(nand(bit, obj.bit), nand(bit, obj.bit));
         return result;
     }
-    Logics operator ^ (Logics const& obj) {
+    Logics operator + (Logics const& obj) {
         Logics result;
-        std::cout << "Start OR" << endl;
+        cout << "Start OR" << endl;
         result.bit = nand(nand(bit, bit), nand(obj.bit, obj.bit));
         return result;
     }
     Logics operator ! () {
         Logics result;
-        std::cout << "Start NOT" << endl;
+        cout << "Start NOT" << endl;
         result.bit = nand(nand(bit,bit), nand(bit,bit));
         return result;
     }
 
 };
 
+
+
 int * iterate(int[], int[]);
 int* iterate(int first[], int second[]) {
-    static int third[]= { 0,0,0,0,0,0 };
+    static int third[] = { 0,0,0,0,0,0 };
+
     int j = 1;
+    int k = 1;
     while (j < 6) {
-        int first1[7];
-        int second1[7];
+        int first1[12];
+        int second1[12];
         first1[1] = first[1];
         first1[2] = first[2];
         first1[3] = first[3];
         first1[4] = first[4];
         first1[5] = first[5];
         first1[6] = first[1];
+        first1[7] = first[2];
+        first1[8] = first[3];
+        first1[9] = first[4];
+        first1[10] = first[5];
+        first1[11] = first[1];
         second1[1] = second[1];
         second1[2] = second[2];
         second1[3] = second[3];
         second1[4] = second[4];
         second1[5] = second[5];
         second1[6] = second[1];
-        std::cout << "third of " << second1[j+1] << "is first of " << j << endl;
-        third[(second1[j])] = first1[j];
+        second1[7] = second[2];
+        second1[8] = second[3];
+        second1[9] = second[4];
+        second1[10] = second[5];
+        second1[11] = second[1];
+        //cout << "third of " << second1[j+1] << "is first of " << j << endl;
+        third[1] = 1;
+        while (k < 5) {
+            third[(k + 1)] = second1[compare((first1[(compare(third[k], first1) + 1)]), second1) + 1];
+            k = k + 1;
+        }
+        k = 1;
+        //third[(second1[j])] = first1[j];
         j = j + 1;
     }
     j = 1;
+    cout << third[1] << "," << third[2] << "," << third[3] << "," << third[4] << "," << third[5] << "hi" << endl;
     return third;  
 }
 
-int compare(int, int, int[]);
-int compare(int len, int t, int arr[]) {
-    int j = 0;
-    while (j < len) {
+int compare(int t, int arr[]) {
+    int l = 0;
+    while (l < 6) {
 //This is a search algorithm to find which index the thing is at.
 //I'm lazy and/or efficient, if you want to run this a billion times on a super computer
 //REPLACE THIS WITH A BINARY SEARCH OR SOMETHING THAT IS ACTUALLY EFFICIENT
-        std::cout << "I am:" << arr[0] << endl;
-        std::cout << "I am:" << arr[1] << endl;
-        std::cout << "I am:" << arr[2] << endl;
-        std::cout << "I am:" << arr[3] << endl;
-        std::cout << "I am:" << arr[4] << j<< endl;
+        /*cout << "I am:" << arr[0] << endl;
+        cout << "I am:" << arr[1] << endl;
+        cout << "I am:" << arr[2] << endl;
+        cout << "I am:" << arr[3] << endl;
+        cout << "I am:" << arr[4] << j<< endl; */
         // if the i-th element is t
         // then return the index
-        if (arr[j]== t) {
-            std::cout << "I am returning i of:" << j << endl;
-            return j;
+        if (arr[l]== t) {
+            //cout << "I am returning i of:" << j << endl;
+            return l;
         }
         else {
-            j = j + 1;
+            l = l + 1;
         }
     }
-    std::cout << "CRITICAL ERROR, ITEM t NOT FOUND in ARRAY";
+    cout << "CRITICAL ERROR, ITEM t NOT FOUND in ARRAY";
     return 5;
 }
 
@@ -113,11 +135,11 @@ int nand(int x, int y)
     int z = 0;
 
     if (x == 1) {
-        f=iterate(a, p);
+        f = a;//iterate(a, a);
         cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
     }
     else {
-        f=iterate(p, p);
+        f = p;//iterate(p, p);
         cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
     }
 
@@ -157,11 +179,11 @@ int nand(int x, int y)
 
     if (y == 1) {
         f = iterate(g, d);
-        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << "end" << endl;
     }
     else {
-        f = iterate(g, e);
-        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+        f = iterate(g, e); //e
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << "end" << endl;
     }
     g[1] = f[1];
     g[2] = f[2];
@@ -169,7 +191,7 @@ int nand(int x, int y)
     g[4] = f[4];
     g[5] = f[5]; 
 
-    if (((f[5] == p[5]) && (f[1] == p[1]) && (f[2] == p[2]) && (f[3] == p[3]) && (f[4] == p[4]))) {
+    if (((f[5] == a[5]) && (f[1] == a[1]) && (f[2] == a[2]) && (f[3] == a[3]) && (f[4] == a[4]))) {
         //there is a better way to do this if you don't know the length of the permutation, but we do so we're doing this
         //if you have randomly lengthed permutations, you'll have to modify this part of the code
         //and honestly more of the code than I care to admit
@@ -185,6 +207,8 @@ int nand(int x, int y)
     }
 
 }
+
+
 
 int mysteryfunct(int x, int y)
 {
@@ -207,11 +231,11 @@ int mysteryfunct(int x, int y)
     int z = 0;
 
     if (x == 1) {
-        f = iterate(p, d);
+        f = d;//iterate(d, d);
         cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
     }
     else {
-        f = iterate(p, p);
+        f = p;//iterate(p, p);
         cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
     }
 
@@ -449,7 +473,7 @@ int mysteryfunct(int x, int y)
     g[4] = f[4];
     g[5] = f[5];
 
-    if (((f[5] == p[5]) && (f[1] == p[1]) && (f[2] == p[2]) && (f[3] == p[3]) && (f[4] == p[4]))) {
+    if (((f[5] == a[5]) && (f[1] == a[1]) && (f[2] == a[2]) && (f[3] == a[3]) && (f[4] == a[4]))) {
         //there is a better way to do this if you don't know the length of the permutation, but we do so we're doing this
         //if you have randomly lengthed permutations, you'll have to modify this part of the code
         //and honestly more of the code than I care to admit
@@ -497,6 +521,14 @@ Logics operator!(const Logics& x)
     return z;
 } */
 /*
+void reset(void);
+void reset(void) {
+    superfirst[1] = 1;
+    superfirst[2] = 2;
+    superfirst[3] = 3;
+    superfirst[4] = 4;
+    superfirst[5] = 5;
+}
 class Logics
 {
 public:
@@ -520,7 +552,32 @@ Fraction operator*(Fraction lhs, const Fraction& rhs)
 } 
 int nand(int x, int y)
 {
-
+/*if ((superfirst[2] == 2) & (superfirst[4] == 4) & (superfirst[3] == 3) & (superfirst[5] == 5) & (superfirst[1] == 1)) {
+        if ((first[2] != 2) & (first[4] != 4) & (first[3] != 3) & (first[5] != 5) & (first[1] != 1)) {
+            //What is going on here? Well this complex monstrosity of a code is that I need to know the first item in if I want to get logic out. Humans do this better. CSCI students write this better.
+            superfirst[1] = first[1];
+            superfirst[2] = first[2];
+            superfirst[3] = first[3];
+            superfirst[4] = first[4];
+            superfirst[5] = first[5];
+        }
+        else {
+            superfirst[1] = second[1];
+            superfirst[2] = second[2];
+            superfirst[3] = second[3];
+            superfirst[4] = second[4];
+            superfirst[5] = second[5];
+        }
+    }
+    if (supersecond[0] == 7) { //seven is outside of the scope of anything that would ever occur naturally
+        supersecond[1] = second[1];
+        supersecond[2] = second[2];
+        supersecond[3] = second[3];
+        supersecond[4] = second[4];
+        supersecond[5] = second[5];
+        supersecond[0] = second[0];
+    }
+    else;
 
     int a[] = {1,3,4,2,5};
     int b[] = {1,4,5,2,3};
@@ -640,4 +697,142 @@ int nand(int x, int y)
 
 
 
-}*/
+}
+
+int* mixurate(int[], int[]);
+int* mixurate(int first[], int second[]) {
+    static int thirdo[] = { 0,0,0,0,0,0 };
+
+    int j = 1;
+    int k = 1;
+    int third1[6];
+    while (j < 6) {
+        int first1[7];
+        int second1[7];
+
+        first1[1] = first[1];
+        first1[2] = first[2];
+        first1[3] = first[3];
+        first1[4] = first[4];
+        first1[5] = first[5];
+        first1[6] = first[1];
+        second1[1] = second[1];
+        second1[2] = second[2];
+        second1[3] = second[3];
+        second1[4] = second[4];
+        second1[5] = second[5];
+        second1[6] = second[1];
+        //cout << "third of " << second1[j+1] << "is first of " << j << endl;
+
+        thirdo[(second1[j])] = first1[j];
+        j = j + 1;
+    }
+    third1[1] = thirdo[1];
+    third1[2] = thirdo[2];
+    third1[3] = thirdo[3];
+    third1[4] = thirdo[4];
+    third1[5] = thirdo[5];
+
+    thirdo[2] = third1[5];
+    thirdo[3] = third1[4];
+    thirdo[4] = third1[2];
+    thirdo[5] = third1[3];
+
+    j = 1;
+    return thirdo;
+}
+
+
+int munand(int x, int y)
+{
+    //Testing a hypothesis for faster computations
+
+    int a[] = { 0,1,3,4,2,5 }; //Why is there a zero here? for convienience, so that int[1] is the first col, and I don't have to reorient things
+    int b[] = { 0,1,4,5,2,3 };
+    int c[] = { 0,1,5,2,4,3 };
+    int d[] = { 0,1,4,2,3,5 };
+    int e[] = { 0,1,2,5,3,4 };
+    int p[] = { 0,1,2,3,4,5 };
+    int t = 0;
+    int i = 0;
+    int* f;
+    int g[] = { 0,0,0,0,0,0 };
+    //int cont[] = { 1,2,1,2 }; //x, y, x, y
+    int z = 0;
+
+    if (x == 1) {
+        f = a;//iterate(a, a);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+    else {
+        f = p;//iterate(p, p);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+
+    g[1] = f[1]; // You may be wondering what all these grossnesses are and the answer is that I like to code in Python, but I'm coding in C++
+    g[2] = f[2]; // This means that I'm used to the luxuries of Python's array handling, and not used to weird C++ things where it will glitch
+    g[3] = f[3]; // out and say that the next permutation is 1, 5, 5, 5, 5, and that the one after that is 5, 5, 5, 5, 5
+    g[4] = f[4]; // I have only a vague idea what causes this, but periodically copying the array to a new array fixes it.
+    g[5] = f[5];
+
+    if (y == 1) {
+        f = mixurate(g, b);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+    else {
+        f = mixurate(g, p);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+    g[1] = f[1];
+    g[2] = f[2];
+    g[3] = f[3];
+    g[4] = f[4];
+    g[5] = f[5];
+
+    if (x == 1) {
+        f = mixurate(g, c);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+    else {
+        f = mixurate(g, p);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << endl;
+    }
+    g[1] = f[1];
+    g[2] = f[2];
+    g[3] = f[3];
+    g[4] = f[4];
+    g[5] = f[5];
+
+    if (y == 1) {
+        f = mixurate(g, d);
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << "end" << endl;
+    }
+    else {
+        f = mixurate(g, e); //e
+        cout << f[1] << "," << f[2] << "," << f[3] << "," << f[4] << "," << f[5] << "end" << endl;
+    }
+    g[1] = f[1];
+    g[2] = f[2];
+    g[3] = f[3];
+    g[4] = f[4];
+    g[5] = f[5];
+
+    if (((f[5] == a[5]) && (f[1] == a[1]) && (f[2] == a[2]) && (f[3] == a[3]) && (f[4] == a[4]))) {
+        //there is a better way to do this if you don't know the length of the permutation, but we do so we're doing this
+        //if you have randomly lengthed permutations, you'll have to modify this part of the code
+        //and honestly more of the code than I care to admit
+
+        z = 0;
+        std::cout << "The truth is zero.";
+        return z;
+    }
+    else {
+        z = 1;
+        std::cout << "The truth is one.";
+        return z;
+    }
+
+}
+
+
+*/

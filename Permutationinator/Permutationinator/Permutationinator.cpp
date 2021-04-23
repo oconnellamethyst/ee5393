@@ -7,11 +7,17 @@
 
 int main()
 {
+	cout << "FUCK" << endl;
+	int demon[] = { 0,1,2,3,4,5 };
+	int demonaire[] = { 0,1,3,4,2,5 };
+	//int demoness[] = { 0,0,0,0,0,0 };
+	iterate(demon, demonaire);
 	cout << "start the nand" << endl;
 	nand(0, 0); std::cout << "DONE" << endl << endl;
 	nand(0, 1); std::cout << "DONE" << endl << endl;
 	nand(1, 0); std::cout << "DONE" << endl << endl;
 	nand(1, 1); std::cout << "DONE" << endl << endl;
+
 
 	cout << "start the mystery funct" << endl;
 	mysteryfunct(0, 0);
@@ -83,7 +89,18 @@ std::cout << "DONE7" << endl << endl;
 
 	//(((x ^ y) * z) ^ x);
 	x^ y;
-std::cout << "DONE8" << endl << endl; */
+std::cout << "DONE8" << endl << endl; 
+
+	cout << "start the munand" << endl;
+	munand(0, 0); std::cout << "DONE" << endl << endl;
+	munand(0, 1); std::cout << "DONE" << endl << endl;
+	munand(1, 0); std::cout << "DONE" << endl << endl;
+	munand(1, 1); std::cout << "DONE" << endl << endl;
+
+
+*/
+
+
 	while(1) {};
 };
 
